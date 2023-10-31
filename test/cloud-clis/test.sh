@@ -10,7 +10,6 @@ source dev-container-features-test-lib
 
 # Feature-specific tests
 # The 'check' command comes from the dev-container-features-test-lib.
-#check "verifying default install" bash -c "/usr/local/bin/aws --version"
 check "aws is installed at correct path" bash -c "which aws"
 
 # Report results
