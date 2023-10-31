@@ -1,0 +1,11 @@
+{
+    "name": "Dapr CLI",
+    "id": "dapr",
+    "version": "1.0.0",
+    "description": "Installs the Dapr command line interface tool.",    
+    "options": {
+    },
+    "installsAfter": [
+        "ghcr.io/devcontainers/features/common-utils"
+    ]
+}
