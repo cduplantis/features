@@ -1,0 +1,26 @@
+{
+    "name": "Cloud Clis",
+    "id": "cloud-clis",
+    "version": "1.0.0",
+    "description": "A collection of Cloud Provider Clis",
+    "options": {
+        "installAzure": {
+            "type": "boolean",
+            "default": false,
+            "description": "Install the Azure Command Line Interface tool"
+        },
+        "installAws": {
+            "type": "boolean",
+            "default": true,
+            "description": "Install the AWS Command Line Interface tool"
+        },
+        "installGCloud": {
+            "type": "boolean",
+            "default": false,
+            "description": "Install the Google GCloud Command Line Interface tool"
+        }
+    },
+    "installsAfter": [
+        "ghcr.io/devcontainers/features/common-utils"
+    ]
+}

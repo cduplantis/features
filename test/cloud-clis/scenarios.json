@@ -1,0 +1,32 @@
+{
+    "aws": {
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+        "features": {
+            "cloud-clis": {
+                "installAws": "true",
+                "installAzure": "false",
+                "installGCloud": "false"
+            }
+        }
+    },
+    "azure": {
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+        "features": {
+            "cloud-clis": {
+                "installAws": "false",
+                "installAzure": "true",
+                "installGCloud": "false"
+            }
+        }
+    },
+    "gcloud": {
+        "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+        "features": {
+            "cloud-clis": {
+                "installAws": "false",
+                "installAzure": "false",
+                "installGCloud": "true"
+            }
+        }
+    }
+}
