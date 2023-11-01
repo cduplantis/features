@@ -1,6 +1,7 @@
 {
-    "dapr": {
+    "dapr-vscode": {
         "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+        "remoteUser": "vscode",
         "features": {
             "dapr": {
             }
