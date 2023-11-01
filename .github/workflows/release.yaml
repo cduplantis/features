@@ -18,7 +18,6 @@ jobs:
         uses: devcontainers/action@v1
         with:
           publish-features: "true"
-          publish-templates: "true"
           base-path-to-features: "./features/src"
           generate-docs: "true"
           
