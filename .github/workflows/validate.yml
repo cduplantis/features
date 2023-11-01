@@ -2,6 +2,9 @@ name: "Validate devcontainer-feature.json files"
 on:
   workflow_dispatch:
   pull_request:
+    paths:
+      - 'features/**/**'
+      - 'templates/**/**'
 
 jobs:
   validate:
@@ -10,7 +13,8 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: "Validate devcontainer-feature.json files"
-        uses: devcontainers/action@v1
+        uses: devcontainers/action@v1                
         with:
           validate-only: "true"
-          base-path-to-features: "./src"
+          base-path-to-features: "./features/src"
+          base-path-to-templates: "./templates/src"
