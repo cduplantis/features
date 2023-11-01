@@ -20,7 +20,6 @@ jobs:
           publish-features: "true"
           publish-templates: "true"
           base-path-to-features: "./features/src"
-          base-path-to-templates: "./templates/src"
           generate-docs: "true"
           
         env:
