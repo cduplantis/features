@@ -4,9 +4,9 @@ on:
   workflow_dispatch:
   push:
     tags:
-    - 'v*'
+      - 'v*'
     paths:
-        - 'containers/**/devcontainer.json'
+      - 'containers/**/devcontainer.json'
 
 env:
     REGISTRY: ghcr.io        
