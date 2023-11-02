@@ -1,0 +1,47 @@
+// For format details, see https:https://containers.dev/implementors/spec/. For config options, see the README at:
+// https://github.com/devcontainers/images/tree/main/src/base-debian
+{
+	"name": "Dapr and tools Developement Container",
+	
+	"image": "mcr.microsoft.com/devcontainers/base:bullseye",
+
+	// Install utils, go, docker-in-docker, and other tools
+	// For more info about dev container Features see https://containers.dev/features
+	"features": {
+        "ghcr.io/devcontainers/features/common-utils:2": {
+            "installZsh": "true",
+            "username": "vscode",
+            "userUid": "1000",
+            "userGid": "1000",
+            "upgradePackages": "true"
+        },
+		"ghcr.io/devcontainers/features/go:1": {},
+        "ghcr.io/devcontainers/features/dotnet:2": {
+            "version": "6.0",
+            "additionalVersions": "7.0, 8.0"
+        },
+        "ghcr.io/devcontainers/features/node:1": {},
+		"ghcr.io/devcontainers/features/python:1": {},
+		// Install kubectl, but skip minikube and helm
+		"ghcr.io/devcontainers/features/kubectl-helm-minikube:1": {
+			"version": "latest",
+			"helm": "none",
+			"minikube": "none"
+		},
+		// Enable running docker in docker
+		"ghcr.io/devcontainers/features/docker-in-docker:2": {},
+		"ghcr.io/devcontainers/features/sshd:1": {},
+		"ghcr.io/devcontainers/features/github-cli:1": {},
+        "ghcr.io/devcontainers/features/git:1": {
+            "version": "latest",
+            "ppa": "false"
+        },
+        "ghcr.io/dapr/cli/dapr-cli:0": {},
+        "ghcr.io/cduplantis/features/cloud-clis:latest": {},          
+        "ghcr.io/devcontainers-contrib/features/aws-cdk:2": {},
+	}
+}
+
+
+
+
