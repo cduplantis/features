@@ -2,11 +2,11 @@ name: Build and push images
 
 on: 
   workflow_dispatch:
-  push:
-    tags:
-      - 'v*'
-    paths:
-      - 'containers/**/devcontainer.json'
+  # push:
+  #   tags:
+  #     - 'v*'
+  #   paths:
+  #     - 'containers/**/devcontainer.json'
 
 env:
     REGISTRY: ghcr.io        
