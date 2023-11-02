@@ -2,11 +2,11 @@ name: Build and push images
 
 on: 
   workflow_dispatch:
-  # push:
-  #   tags:
-  #     - 'v*'
-  #   paths:
-  #     - 'containers/**/devcontainer.json'
+  push:
+    tags:
+      - 'v*'
+    paths:
+      - 'containers/**/devcontainer.json'
 
 env:
     REGISTRY: ghcr.io        
@@ -14,8 +14,8 @@ env:
 jobs:
   build-and-push:
     name: Build and push images
-    # if: ${{ github.event.base_ref == 'refs/heads/main' }}
-    runs-on: devcontainer-image-builder-ubuntu
+    if: ${{ github.event.base_ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
     strategy:
         fail-fast: false
         matrix:
