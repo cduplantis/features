@@ -51,9 +51,9 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: |
-            ${{ github.actor }}/${{ matrix.container }}
-            ghcr.io/${{ github.actor }}/${{ matrix.container }}
-            docker.io/${{ github.actor }}/${{ matrix.container }}
+            cduplantis/${{ matrix.container }}
+            ghcr.io/cduplantis/${{ matrix.container }}
+            docker.io/cduplantis/${{ matrix.container }}
           tags: |
             type=ref,event=branch
             type=ref,event=pr
@@ -74,8 +74,8 @@ jobs:
         uses: devcontainers/ci@v0.3
         with:
           subFolder: containers/${{ matrix.container }}
-          imageName: ghcr.io/${{ github.actor }}/${{ matrix.container }}
-          cacheFrom: ghcr.io/${{ github.actor }}/${{ matrix.container }}
+          imageName: ghcr.io/cduplantis/${{ matrix.container }}
+          cacheFrom: ghcr.io/cduplantis/${{ matrix.container }}
           imageTag: ${{ steps.csv_tags.outputs.tags_csv }}            
           platform: linux/amd64
           push: always
