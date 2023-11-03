@@ -55,7 +55,7 @@ jobs:
         uses: devcontainers/ci@v0.3
         with:
           imageName: ${{ secrets.DOCKERHUB_USERNAME }}/${{ matrix.container }}
-          imageTag: latest,${{ env.VERSION }},v${{ env.VERSION }}
+          imageTag: latest,${{ github.env.VERSION }},v${{ github.env.VERSION }}
           platform: linux/amd64
           subFolder: containers/${{ matrix.container }}
           push: always
