@@ -51,9 +51,9 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: |
-            ${{ env.IMAGE_NAME }}
-            ghcr.io/${{ env.IMAGE_NAME }}
-            docker.io/${{ env.IMAGE_NAME }}
+            ${{ github.actor }}/${{ matrix.container }}
+            ghcr.io/${{ github.actor }}/${{ matrix.container }}
+            docker.io/${{ github.actor }}/${{ matrix.container }}
           tags: |
             type=ref,event=branch
             type=ref,event=pr
@@ -73,8 +73,10 @@ jobs:
       - name: Pre-build dev container image
         uses: devcontainers/ci@v0.3
         with:
-          subFolder: ${{ env.SRC_FOLDER }}
-          imageName: ghcr.io/${{ env.IMAGE_NAME }}
-          cacheFrom: ghcr.io/${{ env.IMAGE_NAME }}
+          subFolder: containers/${{ matrix.container }}
+          imageName: ghcr.io/${{ github.actor }}/${{ matrix.container }}
+          cacheFrom: ghcr.io/${{ github.actor }}/${{ matrix.container }}
           imageTag: ${{ steps.csv_tags.outputs.tags_csv }}            
+          platform: linux/amd64
           push: always
+          
