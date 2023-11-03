@@ -11,6 +11,7 @@ on:
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
+    # if: (github.ref == 'refs/heads/main' && startsWith(github.ref, 'refs/tags/')) || github.event_name == 'workflow_dispatch'
     strategy:
       fail-fast: false
       matrix:
@@ -45,17 +46,35 @@ jobs:
       #     username: ${{ secrets.AWS_ACCESS_KEY_ID }}
       #     password: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
-      - name: Extract version from git tags
-        id: version
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: |
+            ${{ env.IMAGE_NAME }}
+            ghcr.io/${{ env.IMAGE_NAME }}
+            docker.io/${{ env.IMAGE_NAME }}
+          tags: |
+            type=ref,event=branch
+            type=ref,event=pr
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{major}}
+            type=sha
+            
+      # New step to convert the output to comma-separated list
+      - name: Convert Docker tags to CSV
+        id: csv_tags
         run: |
-          version=$(git tag --list "${{ matrix.container }}_*" --sort=-v:refname | head -n 1 | sed "s/${{ matrix.container }}_//")
-          echo "VERSION=$version" >> $GITHUB_ENV
+          tags_csv=$(echo "${{ steps.meta.outputs.tags }}" | tr '\n' ',' | sed 's/,$//')
+          echo "tags_csv=$tags_csv"
+          echo "DOCKER_TAGS=$tags_csv" >> $GITHUB_ENV
 
-      - name: Build and Push Image
+      - name: Pre-build dev container image
         uses: devcontainers/ci@v0.3
         with:
-          imageName: ${{ secrets.DOCKERHUB_USERNAME }}/${{ matrix.container }}
-          imageTag: latest,${{ github.env.VERSION }},v${{ github.env.VERSION }}
-          platform: linux/amd64
-          subFolder: containers/${{ matrix.container }}
+          subFolder: ${{ env.SRC_FOLDER }}
+          imageName: ghcr.io/${{ env.IMAGE_NAME }}
+          cacheFrom: ghcr.io/${{ env.IMAGE_NAME }}
+          imageTag: ${{ steps.csv_tags.outputs.tags_csv }}            
           push: always
